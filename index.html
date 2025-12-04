@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 종합 위기 탐지 시스템</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 사이드바 -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="#dashboard" class="logo-link">
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <div class="logo-text">
+                        <h1>AI 위기 탐지</h1>
+                        <p>AI CRISIS DETECTION</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="nav-item active" data-page="dashboard">
+                    <a href="#dashboard">대시보드</a>
+                </li>
+                <li class="nav-item" data-page="realtime">
+                    <a href="#realtime">실시간 모니터링</a>
+                </li>
+                <li class="nav-item" data-page="logs">
+                    <a href="#logs">감지 로그</a>
+                </li>
+                <li class="nav-item" data-page="members">
+                    <a href="#members">구성원 관리</a>
+                </li>
+                <li class="nav-item" data-page="guide">
+                    <a href="#guide">사용 가이드</a>
+                </li>
+            </ul>
+        </nav>
+
+    </aside>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main-content">
+        <!-- 헤더 -->
+        <header class="header">
+            
+                <div class="team-info-wrapper">
+                    <div class="team-info" id="teamInfoButton"> 
+                        <span class="team-name">Team 4</span>
+                        <div class="team-icon"></div>
+                    </div>
+                    
+                    <div class="team-menu" id="teamMenu">
+                        <p style="font-size:16px; color:#00a8ff;">AI융합학부</p>
+                        <p>김윤성</p>
+                        <p>김지유</p>
+                        <p>마진성</p>
+                        <p>오유성</p>
+                    </div>
+                </div>
+
+            <button class="mobile-menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </header>
+
+        <div class="content-area">
+            <!-- 대시보드 페이지 -->
+            <section id="dashboard" class="page active">
+                <h2 class="page-title">대시보드</h2>
+                <div class="dashboard-grid">
+                    <div class="card AI-info">
+                        <h3><i class="fa-solid fa-video card-icon"></i>AI 정보</h3>
+                        <div class="card-content overview-summary">
+                            <p> 딥러닝 기반의 AI를 사용하여 실시간으로 안전 사고를 감지합니다. <br> 주요 기능은 다음과 같습니다.</p>
+                            <ul class="feature-list">
+                                <li>동작 감지 및 객체 인식</li>
+                                <li>낙상 자동 감지</li>
+                                <li>상황 분석</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card recent-logs">
+                        <h3><i class="fa-solid fa-clipboard-list card-icon"></i>최근 감지 로그</h3>
+                        <div class="card-content log-list">
+                            <!-- 최근 로그 데이터 임시 -->
+                            <div class="log-item">
+                                <span class="log-time">23:45:12</span>
+                                <span class="log-type danger">🚨 위험 감지</span>
+                            </div>
+                            <div class="log-item">
+                                <span class="log-time">22:01:05</span>
+                                <span class="log-type warning">⚠️ 낙상 감지</span>
+                            </div>
+                            <div class="log-item">
+                                <span class="log-time">21:30:40</span>
+                                <span class="log-type info">🟢 이상 없음 </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card registered-members">
+                        <h3><i class="fa-solid fa-user-check card-icon"></i>등록된 구성원</h3>
+                        <div class="card-content member-list">
+                            <!-- 구성원 데이터 임시 -->
+                            <div class="member-item">
+                                <span class="member-name">어머니</span>
+                                <span class="member-phone">010-XXXX-1234</span>
+                            </div>
+                            <div class="member-item">
+                                <span class="member-name">아버지</span>
+                                <span class="member-phone">010-XXXX-5678</span>
+                            </div>
+                            <div class="member-item">
+                                <span class="member-name">담당 경비원</span>
+                                <span class="member-phone">070-XXXX-9999</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card statistics">
+                        <h3><i class="fa-solid fa-chart-bar card-icon"></i>최근 7일 통계</h3>
+                        <div class="card-content chart-area">
+                            <canvas id="weekly-status-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 실시간 모니터링 페이지 -->
+            <section id="realtime" class="page">
+                <h2 class="page-title">실시간 모니터링</h2>
+                <div class="monitoring-grid">
+                    <div class="webcam-container">
+                        <div class="webcam-placeholder">
+                            <video id="webcam-feed" autoplay muted playsinline></video>
+                            <p id="placeholder-text">웹캠</p>
+                        </div>
+                    </div>
+                    <div class="monitoring-info">
+                        <div class="info-card">
+                            <h3>실시간 정보</h3>
+                            <div class="info-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 로그 페이지 -->
+            <section id="logs" class="page">
+                <h2 class="page-title">감지 로그</h2>
+                <div class="logs-container">
+                    <div class="logs-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>시간</th>
+                                    <th>카메라</th>
+                                    <th>상태</th>
+                                    <th>상세</th>
+                                    <th>삭제</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 로그 데이터 -->
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 구성원 페이지 -->
+            <section id="members" class="page">
+                <h2 class="page-title">구성원 관리</h2>
+                <div class="members-grid">
+                    <div class="add-contact-card card">
+                        <h3>연락처 추가</h3>
+                        <form id="addContactForm">
+                            <div class="form-group">
+                                <label for="contact-name">이름</label>
+                                <input type="text" id="contact-name" placeholder="Ex. Mom" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-phone">전화번호</label>
+                                <input type="tel" id="contact-phone" placeholder="Ex. 010-1234-5678" required>
+                            </div>
+                            <button type="submit" class="register-btn">연락처 등록</button>
+                        </form>
+                    </div>
+                    
+                    <div class="registered-contacts-card card">
+                        <h3>등록된 연락처</h3>
+                        <div class="contact-list" id="contactList">
+                            <!-- 구성원 데이터 임시 -->
+                            <div class="contact-item">
+                                <div class="contact-details">
+                                    <span class="contact-name">Mom</span>
+                                    <span class="contact-phone">010-1234-5678</span>
+                                </div>
+                                <button class="delete-contact-btn">🗑️</button>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-details">
+                                    <span class="contact-name">Dad</span>
+                                    <span class="contact-phone">010-8765-4321</span>
+                                </div>
+                                <button class="delete-contact-btn">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+
+            <!-- 사용 가이드 페이지 -->
+            <section id="guide" class="page">
+                <h2 class="page-title">사용 가이드</h2>
+                <div class="guide-container">
+                    <div class="guide-section">
+                        <h3><i class="fa-solid fa-user-plus guide-icon"></i>구성원 관리</h3>
+                        <div class="guide-content">
+                            <p> "구성원 관리" 페이지에서 시스템 알림을 수신할 구성원의 이름과 전화번호를 입력하여 등록합니다. 등록된 구성원에게만 알림이 전송됩니다.</p>
+                        </div>
+                    </div>
+                    <div class="guide-section">
+                        <h3><i class="fa-solid fa-video guide-icon"></i>실시간 모니터링</h3>
+                        <div class="guide-content">
+                            <p>"실시간 모니터링' 페이지에서 웹캠을 통한 화면을 확인할 수 있고 그에 맞는 실시간 정보를 얻을 수 있습니다.</p>
+                        </div>
+                    </div>
+                    <div class="guide-section">
+                        <h3><i class="fa-solid fa-chart-line guide-icon"></i>대시보드</h3>
+                        <div class="guide-content">
+                            <p>"대시보드"를 통해 웹 페이지의 AI 정보, 등록된 구성원, 감지 로그 통계를 요약적으로 확인 할 수 있습니다.</p>
+                        </div>
+                    </div>
+                    <div class="guide-section">
+                        <h3><i class="fa-solid fa-clipboard-list guide-icon"></i>감지 로그</h3>
+                        <div class="guide-content">
+                            <p>"감지 로그" 페이지에서 위험 발생 시점의 스냅샷 이미지와 상세 내역을 검토할 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
